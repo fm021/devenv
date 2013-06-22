@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/fumitaka/src/billing/10_src/batch/conf'
+let g:netrw_dirhist_2='/home/fumitaka/src/billing/10_src/batch/billing'
+let g:netrw_dirhist_3='/home/fumitaka/src/billing/10_src'
+let g:netrw_dirhist_4='/home/fumitaka/src/chalice/ftplugin'
+let g:netrw_dirhist_5='/home/fumitaka/Dropbox/dev/vim/dot_vim/autoload'
+let g:netrw_dirhist_6='/home/fumitaka/src/affiliateblog/10_src/front/app/View'
