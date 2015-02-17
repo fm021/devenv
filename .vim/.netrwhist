@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/fumitaka/src/billing/10_src/batch/conf'
-let g:netrw_dirhist_2='/home/fumitaka/src/billing/10_src/batch/billing'
-let g:netrw_dirhist_3='/home/fumitaka/src/billing/10_src'
-let g:netrw_dirhist_4='/home/fumitaka/src/chalice/ftplugin'
-let g:netrw_dirhist_5='/home/fumitaka/Dropbox/dev/vim/dot_vim/autoload'
-let g:netrw_dirhist_6='/home/fumitaka/src/affiliateblog/10_src/front/app/View'
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/fumitaka/src/adfit_workspace/api'
+let g:netrw_dirhist_2='/home/fumitaka/src/adfit_workspace/admin'
+let g:netrw_dirhist_3='/home/fumitaka/src/adfit_workspace/admin/src/JnyECS/JobStationCorporateBundle/Controller'
+let g:netrw_dirhist_4='/home/fumitaka/.config/google-chrome/Crash Reports'
+let g:netrw_dirhist_5='/home/fumitaka/src/bidx/spike'
+let g:netrw_dirhist_6='/home/fumitaka/src/bidx'
+let g:netrw_dirhist_7='/home/fumitaka/src/bidx/src'

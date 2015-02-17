@@ -11,6 +11,9 @@ autocmd FileType php :set omnifunc=phpcomplete#CompletePHP
 " コマンド補完を開始するキー
 set wildchar=<tab>
 
+" tags
+set tags=./.tags;
+
 " ステータスラインに表示する情報の指定
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=
 " ステータスラインの色
@@ -51,15 +54,21 @@ map <silent>    <F2>    :bp<cr>
 map <silent>    <F3>    :bn<cr>
 nmap bb :ls<CR>:buf 
 
+" ESC to ;;
+:imap ;; <Esc>
+
+
 " Formatter
 " http://vim.wikia.com/wiki/Cleanup_your_HTML
 command Thtml execute ":%!tidy -q -i -a --show-errors 0"
 command Txml execute ":%!tidy -q -i -a --show-errors 0 -xml"
 
+" XML Formatter
+"map @@x !%xmllint --format --recover -
+map @@x !%xmllint --format --recover
+
 " 候補のポップアップ中にエンターを入力したときに、改行されるようにする。
 "inoremap <expr> <CR> (pumvisible()) ? "\<C-y>\<CR>" : "\<CR>"
-
-
 
 " 文字コードの自動認識
 "if &encoding !=# 'utf-8'
