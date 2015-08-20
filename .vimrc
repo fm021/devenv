@@ -8,7 +8,7 @@
 "imap [ []<LEFT>
 "imap ( ()<LEFT>
 
-" NeoBundle
+" for Neobundle {{{
 set nocompatible
 filetype plugin indent off
 
@@ -16,17 +16,70 @@ if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim
     call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundleFetch 'Shougo/neobundle.vim'
-    NeoBundle 'Shougo/unite.vim'
     NeoBundle 'Shougo/neosnippet.vim'
+    NeoBundle 'majutsushi/tagbar'
+    NeoBundle 'Shougo/vimfiler'
+    NeoBundle 'Shougo/vimproc'
+    NeoBundle 'Shougo/unite.vim'
+    NeoBundle 'Shougo/unite-outline'
+    NeoBundle 'dgryski/vim-godef'
+    NeoBundle 'vim-jp/vim-go-extra'
     call neobundle#end()
 endif
 
+filetype plugin indent on
+syntax on
+NeoBundleCheck
+" }}}
+
+
+" for golang {{{
+set path+=$GOPATH/src/**
+let g:gofmt_command = 'goimports'
+au BufWritePre *.go Fmt
+au BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4 completeopt=menu,preview
+au FileType go compiler go
+" }}}
+
+" VimFilerTree {{{
+command! VimFilerTree call VimFilerTree(<f-args>)
+function VimFilerTree(...)
+    let l:h = expand(a:0 > 0 ? a:1 : '%:p:h')
+    let l:path = isdirectory(l:h) ? l:h : ''
+    exec ':VimFiler -buffer-name=explorer -split -simple -winwidth=45 -toggle -no-quit ' . l:path
+    wincmd t
+    setl winfixwidth
+endfunction
+autocmd! FileType vimfiler call g:my_vimfiler_settings()
+function! g:my_vimfiler_settings()
+    nmap     <buffer><expr><CR> vimfiler#smart_cursor_map("\<Plug>(vimfiler_expand_tree)", "\<Plug>(vimfiler_edit_file)")
+    nnoremap <buffer>s          :call vimfiler#mappings#do_action('my_split')<CR>
+    nnoremap <buffer>v          :call vimfiler#mappings#do_action('my_vsplit')<CR>
+endfunction
+
+let my_action = {'is_selectable' : 1}
+function! my_action.func(candidates)
+    wincmd p
+    exec 'split '. a:candidates[0].action__path
+endfunction
+call unite#custom_action('file', 'my_split', my_action)
+
+let my_action = {'is_selectable' : 1}
+function! my_action.func(candidates)
+    wincmd p
+    exec 'vsplit '. a:candidates[0].action__path
+endfunction
+call unite#custom_action('file', 'my_vsplit', my_action)
+" }}}
+
+
+
+
+
 " コマンド補完を開始するキー
 set wildchar=<tab>
-
 " tags
 set tags=./.tags;
-
 " ステータスラインに表示する情報の指定
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=
 " ステータスラインの色
