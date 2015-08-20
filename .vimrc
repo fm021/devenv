@@ -1,12 +1,25 @@
 " PHP Manual
-autocmd FileType php :let g:ref_phpmanual_path = "/home/fumitaka/src/php-chunked-xhtml"
-autocmd FileType php :set dictionary=dict/php.dictionary
-autocmd FileType php :set omnifunc=phpcomplete#CompletePHP
+"autocmd FileType php :let g:ref_phpmanual_path = "/home/fumitaka/src/php-chunked-xhtml"
+"autocmd FileType php :set dictionary=dict/php.dictionary
+"autocmd FileType php :set omnifunc=phpcomplete#CompletePHP
 
 " 括弧の補完
 "imap { {}<LEFT>
 "imap [ []<LEFT>
 "imap ( ()<LEFT>
+
+" NeoBundle
+set nocompatible
+filetype plugin indent off
+
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim
+    call neobundle#begin(expand('~/.vim/bundle/'))
+    NeoBundleFetch 'Shougo/neobundle.vim'
+    NeoBundle 'Shougo/unite.vim'
+    NeoBundle 'Shougo/neosnippet.vim'
+    call neobundle#end()
+endif
 
 " コマンド補完を開始するキー
 set wildchar=<tab>
@@ -20,8 +33,7 @@ set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=
 highlight StatusLine   term=NONE cterm=NONE ctermfg=black ctermbg=white
 
 " filetype有効化
-filetype on
-filetype plugin on
+filetype plugin indent on
 filetype indent on
 
 " 現在行の下線処理
@@ -66,6 +78,12 @@ command Txml execute ":%!tidy -q -i -a --show-errors 0 -xml"
 " XML Formatter
 "map @@x !%xmllint --format --recover -
 map @@x !%xmllint --format --recover
+
+" pathogen settings
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
 
 " 候補のポップアップ中にエンターを入力したときに、改行されるようにする。
 "inoremap <expr> <CR> (pumvisible()) ? "\<C-y>\<CR>" : "\<CR>"
